@@ -1,0 +1,27 @@
+.button {
+  border: none;
+  padding: 10px 32px 10px 32px;
+  cursor: pointer;
+  border: 2px solid var(--primary-color);
+  font-family: geom-graphic, sans-serif;
+}
+.background,
+.default {
+  transition-duration: 0.25s;
+}
+.background {
+  background-color: var(--primary-color);
+  color: white;
+}
+.background:hover{
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+.default {
+  background-color: white;
+  color: black;
+}
+.default:hover{
+    background-color: var(--primary-color);
+    color: white;
+}

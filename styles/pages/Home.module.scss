@@ -1,0 +1,38 @@
+.hero{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1.5rem;
+  min-height:75vh;
+  text-align:center;
+  h1, h1+p, .ebayProof{
+    max-width:800px;
+  }
+  h1{
+    font-family: geom-graphic, sans-serif;
+    font-size: 2.5rem;
+  }
+  h1+p{
+    font-family: priori-sans, sans-serif;
+    font-size:1.5rem;
+    color: var(--gray-text);
+  }
+  .ebayProof{
+    font-family: t26-carbon, monospace;
+    font-weight:600;
+    svg{
+      width:2.5rem;
+    }
+    p{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:1rem;
+    }
+  }
+  .buttons{
+    display:flex;
+    gap:2.5rem;
+  }
+}
