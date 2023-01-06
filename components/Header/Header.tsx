@@ -5,8 +5,22 @@ import Image from "next/image";
 
 import Button from "../Button/Button";
 import Search from "../Search/Search";
+import Link from "next/link";
 
-const navigationLinks = ["Shop", "Installation", "Gallery"];
+const navigationLinks = [
+  {
+    text: "Shop",
+    link: "shop",
+  },
+  {
+    text: "Installation",
+    link: "installation",
+  },
+  {
+    text: "Gallery",
+    link: "gallery",
+  },
+];
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -99,7 +113,9 @@ const Header = () => {
           )}
           <ul data-visible={mobileMenuOpen}>
             {navigationLinks.map((link) => (
-              <li key={link}>{link}</li>
+              <li key={link.text}>
+                <Link href={`/${link.link}`}>{link.text}</Link>
+              </li>
             ))}
             <li>
               <Button background={true}>Cart</Button>

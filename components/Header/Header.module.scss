@@ -21,6 +21,7 @@
       li {
         display: flex;
         align-items: center;
+        text-decoration: none;
         svg {
           margin-right: 10px;
         }
@@ -51,6 +52,14 @@
       ul {
         display: flex;
         align-items: center;
+        li a {
+          text-decoration: none;
+          color: black;
+        }
+        li a:hover {
+          transition-duration: 0.25s;
+          color: var(--primary-dark);
+        }
       }
     }
   }
@@ -67,10 +76,10 @@
           width: 2rem;
           aspect-ratio: 1;
           cursor: pointer;
-          position:fixed;
-          top:2rem;
-          right:2rem;
-          z-index:11;
+          position: fixed;
+          top: 2rem;
+          right: 2rem;
+          z-index: 11;
         }
         ul {
           position: fixed;

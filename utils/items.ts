@@ -1,6 +1,3 @@
-import exp from "constants";
-import { type } from "os";
-
 type kitTypeYearsType = {
   range: string;
   basePrice: number;
@@ -13,6 +10,7 @@ type kitTypesModelsType = {
 };
 
 type carMaketypes =
+  | "any"
   | "Iveco"
   | "Citroen"
   | "Peugeot"
@@ -27,7 +25,7 @@ type kitTypesType = {
   id: number;
   make: carMaketypes;
   models: kitTypesModelsType[];
-};
+} ;
 
 const kitTypes: kitTypesType[] = [
   {
@@ -241,7 +239,7 @@ const kitTypes: kitTypesType[] = [
   },
 ];
 
-type CategoryType = "kit" | "gauge" | "air bag" | "accessory";
+type CategoryType = "all" | "kit" | "gauge" | "air bag" | "accessory";
 
 type ShopItem = {
   id: string;
@@ -280,4 +278,5 @@ const Items: ShopItem[] = [];
 })();
 
 export default Items;
-export type { ShopItem };
+export { kitTypes };
+export type { ShopItem, CategoryType, carMaketypes };

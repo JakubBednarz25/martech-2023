@@ -1,0 +1,45 @@
+.shop {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap:2rem;
+  h1 {
+    font-family: geom-graphic, sans-serif;
+  }
+  .container {
+    .filters {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 250px;
+      h2 {
+        font-family: geom-graphic, sans-serif;
+        font-weight: 600;
+      }
+      p {
+        font-family: priori-sans, sans-serif;
+      }
+      .selections {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        .option {
+          display: flex;
+          flex-direction: column;
+          gap: 0.4rem;
+          label {
+            font-family: geom-graphic, sans-serif;
+            font-weight: 400;
+          }
+          select {
+            font-family: priori-sans, sans-serif;
+            text-transform: capitalize;
+            padding: 0.5rem;
+            background: white;
+            border: 1px solid rgb(158, 158, 158);
+          }
+        }
+      }
+    }
+  }
+}
