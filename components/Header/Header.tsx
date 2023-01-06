@@ -99,7 +99,7 @@ const Header = () => {
           )}
           <ul data-visible={mobileMenuOpen}>
             {navigationLinks.map((link) => (
-              <li>{link}</li>
+              <li key={link}>{link}</li>
             ))}
             <li>
               <Button background={true}>Cart</Button>

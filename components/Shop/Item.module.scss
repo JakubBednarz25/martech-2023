@@ -5,11 +5,9 @@
   padding: 1rem;
   gap: 0.5rem;
   align-items: flex-start;
-  max-width:275px;
+  min-width:275px;
   label, h3{
     font-family: geom-graphic, sans-serif;
-  }
-  h3{
   }
   label {
     background-color: var(--primary-color);

@@ -60,7 +60,8 @@
             gap:2rem;
             place-items: center;
             .column{
-                width:300px;
+                max-width:300px;
+                min-width:200px;
             }
         }
         .bottom{

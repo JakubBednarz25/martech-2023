@@ -67,7 +67,7 @@
           width: 2rem;
           aspect-ratio: 1;
           cursor: pointer;
-          position:absolute;
+          position:fixed;
           top:2rem;
           right:2rem;
           z-index:11;
@@ -83,7 +83,7 @@
           max-width: 80vw;
           padding: 5rem 2rem 2rem 2rem;
           z-index: 10;
-          background-color: rgba(0,0,0, 0.05);
+          background-color: white;
         }
         ul[data-visible="false"] {
           display: none;
