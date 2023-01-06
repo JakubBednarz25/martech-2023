@@ -10,7 +10,9 @@ const Home: NextPage = () => {
   return (
     <>
       <section className={styles.hero}>
-        <h1>Professionally manufactured vehicle air suspensions</h1>
+        <h1>
+          Light commercial and leisure vehicles air suspension specialists
+        </h1>
         <p>
           Martech air suspensions ltd is a leading vehicle air suspension kit
           manufacturer and distributor with years of experience, providing you
@@ -39,8 +41,8 @@ const Home: NextPage = () => {
             <p>
               We provide high quality vehicle air suspension kits, designed for
               a range of different vehicle brands and types. Our kits use
-              premium quality airbags, and we do not use any knock-off/Chinese
-              copy bags for our air suspension kits.
+              premium RUBENA airbags, which are famous all around the world for
+              their excellent quality.
             </p>
             <p>
               Our kits are professionally designed, and are perfect to the
@@ -48,9 +50,19 @@ const Home: NextPage = () => {
               The metal used for the mounting brackets is high grade steel, the
               benefit of that being the very long lifespan of the equipment.
             </p>
+            <ul>
+              <p>We produce air suspension kits for the following:</p>
+              <li>Motorhomes</li>
+              <li>Campervans</li>
+              <li>Vans</li>
+              <li>Flatbeds</li>
+              <li>Dropsites</li>
+              <li>Chassis Cabs</li>
+              <li>Recovery Trucks</li>
+            </ul>
             <p>
-              We are partners with a few installation service providers, who can
-              install the air suspension kits for your van/vehicle.
+              We have multiple installation points in the UK, you can find them
+              here.
             </p>
           </div>
           <div className={styles.contactInfo}>
