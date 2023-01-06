@@ -1,12 +1,15 @@
 import type { NextPage } from "next";
 import { useState, useEffect } from "react";
 
-import type { CategoryType, carMaketypes } from "../utils/items";
+import type { CategoryType, carMaketypes, ShopItem } from "../utils/items";
+import Items from "../utils/items";
 import { kitTypes } from "../utils/items";
 
 import styles from "../styles/pages/Shop.module.scss";
 
 import Button from "../components/Button/Button";
+
+import Item from "../components/Shop/Item";
 
 const Shop: NextPage = () => {
   const itemTypes: CategoryType[] = [
@@ -20,6 +23,46 @@ const Shop: NextPage = () => {
   const [kitMake, setKitMake] = useState<carMaketypes>("any");
   const [kitModel, setKitModel] = useState<string>("any");
   const [kitYear, setKitYear] = useState<string>("any");
+
+  const [itemsPerPage, setItemsPerPage] = useState<number>(6);
+  const [page, setPage] = useState<number>(1);
+
+  const [filteredItems, setFilteredItems] = useState<ShopItem[]>(Items);
+
+  const filterKits = () => {
+    let filtered: ShopItem[] = [];
+    const allKits = Items.filter((item) => item.category === "kit");
+    if (kitMake === "any") {
+      filtered = allKits;
+    } else {
+      //Kit make is selected
+      if (kitModel === "any") {
+        //Kit make selected, but not kit model
+        filtered = allKits.filter((kit) => kit.subCategories?.make === kitMake);
+      } else {
+        //Kit make and kit model selected
+        if (kitYear === "any") {
+          //Kit make and kit model selected, but not year
+          filtered = allKits.filter(
+            (kit) =>
+              kit.subCategories?.make === kitMake &&
+              kit.subCategories?.model === kitModel
+          );
+        } else {
+          //Kit make, model and year selected
+          filtered = allKits.filter(
+            (kit) =>
+              kit.subCategories?.make === kitMake &&
+              kit.subCategories?.model === kitModel &&
+              kit.subCategories?.range === kitYear
+          );
+        }
+      }
+    }
+    console.log(filtered);
+    setFilteredItems(filtered);
+    setPage(1);
+  };
 
   useEffect(() => {
     console.log(kitMake);
@@ -121,7 +164,36 @@ const Shop: NextPage = () => {
                 )}
               </div>
             </div>
-            <Button background={true}>Search</Button>
+            <Button
+              background={true}
+              action={() => {
+                if (itemType === "kit") {
+                  filterKits();
+                }
+              }}
+            >
+              Search
+            </Button>
+          </div>
+          <div className={styles.itemsContainer}>
+            <p>{`Showing ${(page - 1) * itemsPerPage + 1}-${Math.min(
+              page * itemsPerPage,
+              filteredItems.length
+            )} of ${filteredItems.length} results`}</p>
+            <div className={styles.wrapper}>
+              {filteredItems
+                .slice((page - 1) * itemsPerPage, page * itemsPerPage)
+                .map((item) => (
+                  <Item data={item} />
+                ))}
+            </div>
+            <div className={styles.pageNumbers}>
+              {Array.from(Array(Math.max(Math.ceil(filteredItems.length/itemsPerPage), 1)).keys()).map((num) => (
+                <div onClick={() => {
+                    setPage(num + 1);
+                }} className={`${styles.pageNav} ${page === num + 1 ? styles.selectedPage : ''}`}>{num + 1}</div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
