@@ -1,3 +1,6 @@
+import exp from "constants";
+import { type } from "os";
+
 type kitTypeYearsType = {
   range: string;
   basePrice: number;
@@ -9,18 +12,20 @@ type kitTypesModelsType = {
   years: kitTypeYearsType[];
 };
 
+type carMaketypes =
+  | "Iveco"
+  | "Citroen"
+  | "Peugeot"
+  | "Fiat"
+  | "Mercedes"
+  | "Ford"
+  | "Volkswagen"
+  | "Vauxhall"
+  | "Nissan";
+
 type kitTypesType = {
   id: number;
-  make:
-    | "Iveco"
-    | "Citroen"
-    | "Peugeot"
-    | "Fiat"
-    | "Mercedes"
-    | "Ford"
-    | "Volkswagen"
-    | "Vauxhall"
-    | "Nissan";
+  make: carMaketypes;
   models: kitTypesModelsType[];
 };
 
@@ -236,14 +241,43 @@ const kitTypes: kitTypesType[] = [
   },
 ];
 
-type ShopItemType = "kit" | "gauge" | "air bag" | "accessory";
+type CategoryType = "kit" | "gauge" | "air bag" | "accessory";
 
 type ShopItem = {
-  id: number;
-  type: ShopItemType;
+  id: string;
   name: string;
+  category: CategoryType;
+  subCategories: {
+    make: carMaketypes;
+    model: string;
+    range: string;
+  } | null;
+  totalPrice: number;
+  image: string;
 };
 
 const Items: ShopItem[] = [];
 
+(function addAllkits() {
+  for (let kit of kitTypes) {
+    for (let model of kit.models) {
+      for (let year of model.years) {
+        Items.push({
+          id: `${kit.make}-${model.name}-${year.range}-${year.basePrice}`,
+          name: `${kit.make} ${model.name} ${year.range}`,
+          category: "kit",
+          subCategories: {
+            make: kit.make,
+            model: model.name,
+            range: year.range,
+          },
+          totalPrice: year.basePrice,
+          image: year.image,
+        });
+      }
+    }
+  }
+})();
+
 export default Items;
+export type { ShopItem };

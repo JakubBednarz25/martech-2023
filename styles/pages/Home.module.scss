@@ -77,11 +77,18 @@
 }
 
 .featuredKits{
-  padding:2rem;
+  padding:3rem 2rem 3rem 2rem;
+  display:flex;
+  flex-direction:column;
+  gap:2rem;
   h2{
     font-family: geom-graphic, sans-serif;
     font-weight: 600;
     font-size:2rem;
+  }
+  .itemsWrapper{
+    display:flex;
+    gap: 2rem;
   }
 }
 

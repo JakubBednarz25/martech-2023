@@ -2,7 +2,9 @@ import type { NextPage } from "next";
 import styles from "../styles/pages/Home.module.scss";
 
 import Button from "../components/Button/Button";
-import Item from '../components/Shop/Item';
+import Item from "../components/Shop/Item";
+
+import Items from "../utils/items";
 
 const Home: NextPage = () => {
   return (
@@ -67,7 +69,9 @@ const Home: NextPage = () => {
       <section className={styles.featuredKits}>
         <h2>Featured Kits</h2>
         <div className={styles.itemsWrapper}>
-          <Item />
+          {Items.slice(0, 5).map((item) => (
+            <Item key={item.id} data={item} />
+          ))}
         </div>
       </section>
     </>
