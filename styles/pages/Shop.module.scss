@@ -1,3 +1,29 @@
+.makes {
+  padding: 3rem;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5rem;
+  h1 {
+    font-family: geom-graphic, sans-serif;
+  }
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    .make {
+      width: 175px;
+      cursor: pointer;
+    }
+    .make:hover {
+      transition-duration: 0.25s;
+      transform: scale(1.1);
+    }
+  }
+}
 .shop {
   padding: 2rem;
   display: flex;

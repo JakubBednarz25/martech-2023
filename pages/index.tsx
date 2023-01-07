@@ -5,10 +5,14 @@ import Button from "../components/Button/Button";
 import Item from "../components/Shop/Item";
 
 import Items from "../utils/items";
+import Head from "next/head";
 
 const Home: NextPage = () => {
   return (
     <>
+    <Head>
+      <title>Martech Air-Suspensions - Home</title>
+    </Head>
       <section className={styles.hero}>
         <h1>
           Light commercial and leisure vehicles air suspension specialists

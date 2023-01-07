@@ -25,7 +25,7 @@ type kitTypesType = {
   id: number;
   make: carMaketypes;
   models: kitTypesModelsType[];
-} ;
+};
 
 const kitTypes: kitTypesType[] = [
   {
@@ -275,6 +275,78 @@ const Items: ShopItem[] = [];
       }
     }
   }
+  Items.push({
+    id: "schrader-valve",
+    name: "Air line Schrader Valve",
+    category: "accessory",
+    subCategories: null,
+    totalPrice: 1149,
+    image: "schrader-valve.png",
+  });
+  Items.push({
+    id: "electric-paddle-valve-switch",
+    name: "Electric Paddle Valve Switch",
+    category: "accessory",
+    subCategories: null,
+    totalPrice: 2099,
+    image: "electric-switch.jpg",
+  });
+  Items.push({
+    id: "universal-air-suspension-gauge",
+    name: "Single Gauge Box",
+    category: "gauge",
+    subCategories: null,
+    totalPrice: 2500,
+    image: "single-gauge.png",
+  });
+  Items.push({
+    id: "manual-paddle-switch",
+    name: "Manual Paddle Switch",
+    category: "accessory",
+    subCategories: null,
+    totalPrice: 3599,
+    image: "manual-paddle-switch.jpg",
+  });
+  Items.push({
+    id: "single-gauge-panel",
+    name: "Single Gauge Panel",
+    category: "gauge",
+    subCategories: null,
+    totalPrice: 4800,
+    image: "silver-gauge.jpg",
+  });
+  Items.push({
+    id: "black-gauge",
+    name: "Single gauge Panel Rocker Switch",
+    category: "gauge",
+    subCategories: null,
+    totalPrice: 4999,
+    image: "black-gauge.png",
+  });
+  Items.push({
+    id: "air-bag",
+    name: "RUBENA Air-Bag 170/2",
+    category: "air bag",
+    subCategories: null,
+    totalPrice: 6500,
+    image: "air-bag.png",
+  });
+  Items.push({
+    id: "4x-manual-padle",
+    name: "4x Manual Paddle Valve Switch",
+    category: "accessory",
+    subCategories: null,
+    totalPrice: 7200,
+    image: "single-button.jpg",
+  });
+  Items.push({
+    id: "double-gauge",
+    name: "Twin Gauge Panel 2x",
+    category: "gauge",
+    subCategories: null,
+    totalPrice: 9900,
+    image: "double-gauge.png",
+  });
 })();
 
 export default Items;
