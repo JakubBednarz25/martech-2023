@@ -1,9 +1,11 @@
+import Link from "next/link";
 import styles from "./Item.module.scss";
 
 import type { ShopItem } from "../../utils/items";
 import { FunctionComponent } from "react";
 import Image from "next/image";
 import Button from "../Button/Button";
+import ItemLabel from "./ItemLabel";
 
 type ItemPropsType = {
   data: ShopItem;
@@ -19,7 +21,7 @@ const Item: FunctionComponent<ItemPropsType> = ({ data }: ItemPropsType) => {
         width={250}
         height={150}
       />
-      <label>{data.category}</label>
+      <ItemLabel type={data.category}/>
       <h3>{data.name}</h3>
       <div>
         <p>{`£${(data.totalPrice / 100).toFixed(2)}`}</p>
@@ -28,7 +30,9 @@ const Item: FunctionComponent<ItemPropsType> = ({ data }: ItemPropsType) => {
           {`£${(data.totalPrice / 120).toFixed(2)}`}
         </p>
       </div>
-      <Button background={true}>View</Button>
+      <Button background={true}>
+        <Link href={`/item/${data.id}`}>View</Link>
+      </Button>
     </article>
   );
 };

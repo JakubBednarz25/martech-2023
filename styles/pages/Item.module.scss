@@ -1,0 +1,112 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5rem;
+  padding: 3rem 0px 3rem 0px;
+  .imageContainer {
+    img {
+      max-width: 500px;
+    }
+  }
+  .description {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width:600px;
+    max-width: 800px;
+    padding: 1rem;
+    .part {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem 0px 1rem 0px;
+      border-bottom: 2px solid rgba(127, 127, 127, 0.1);
+      p,
+      b,
+      ul {
+        font-family: priori-sans, sans-serif;
+        font-size: 1.25rem;
+      }
+      .price,
+      .excludingTaxPrice {
+        font-size: 1.5rem;
+        color: var(--primary-dark);
+        font-weight: 600;
+      }
+      h1,
+      h2 {
+        font-family: geom-graphic, sans-serif;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.25rem;
+      }
+      span {
+        display: flex;
+        gap: 6px;
+        font-family: t26-carbon, monospace;
+      }
+      .property {
+        display: flex;
+        justify-content: space-between;
+        p {
+          text-align: right;
+        }
+      }
+      ul {
+        padding: 0rem 1rem;
+      }
+    }
+    .addToCart {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .select {
+        display: flex;
+        gap: 1rem;
+        select {
+          width: 75px;
+          text-align: center;
+          background: white;
+          border: 2px solid rgba(0, 0, 0, 0.765);
+          font-family: t26-carbon, monospace;
+        }
+      }
+      label {
+        font-weight: 600;
+        color: rgb(103, 103, 103);
+        font-family: geom-graphic, sans-serif;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .imageContainer {
+      img {
+        max-width: 300px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .container {
+    .description {
+      min-width:300px;
+      max-width:350px;
+      .addToCart {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  }
+}
