@@ -1,6 +1,8 @@
 // @ts-nocheck
 import { Component } from "react";
 
+import Head from 'next/head';
+
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 
 import styles from "../styles/pages/Installation.module.scss";
@@ -9,6 +11,9 @@ class Installation extends Component {
   render() {
     return (
       <>
+        <Head>
+          <title>Installation - Martech Air-Suspensions Ltd</title>
+        </Head>
         <div className={styles.topInfoContainer}>
           <div className={styles.topInfo}>
             <h1>Installation Services</h1>

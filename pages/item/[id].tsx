@@ -34,7 +34,7 @@ const Item: FunctionComponent<ItemPageProps> = ({ item }) => {
   return (
     <>
       <Head>
-        <title>{`${item.name}`} - Martech Air Suspensions</title>
+        <title>{`${item.name} - Martech Air-Suspensions Ltd`}</title>
       </Head>
       <div className={styles.container}>
         <section className={styles.imageContainer}>

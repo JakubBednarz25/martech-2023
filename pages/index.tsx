@@ -10,9 +10,9 @@ import Head from "next/head";
 const Home: NextPage = () => {
   return (
     <>
-    <Head>
-      <title>Martech Air-Suspensions - Home</title>
-    </Head>
+      <Head>
+        <title>Home - Martech Air-Suspensions Ltd</title>
+      </Head>
       <section className={styles.hero}>
         <h1>
           Light commercial and leisure vehicles air suspension specialists

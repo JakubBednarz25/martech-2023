@@ -130,9 +130,9 @@ const Shop: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>Martech Air-Suspensions - Shop</title>
-      </Head>
+        <Head>
+          <title>Shop - Martech Air-Suspensions Ltd</title>
+        </Head>
       {makesVisible ? (
         <>
           <section className={styles.makes}>
