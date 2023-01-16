@@ -1,0 +1,82 @@
+.topInfoContainer,
+.location {
+  padding: 3rem;
+  align-self:center;
+}
+
+.topInfoContainer{
+    display:flex;
+    justify-content:center;
+}
+
+.topInfo {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  max-width:1000px;
+  h1 {
+    font-family: geom-graphic, sans-serif;
+  }
+  p {
+    font-family: priori-sans, sans-serif;
+    font-size: 1.5rem;
+    color: var(--gray-text);
+  }
+}
+
+.location {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  .information {
+    h2 {
+      font-family: geom-graphic, sans-serif;
+      font-weight: 600;
+    }
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    .infos {
+      display: flex;
+      gap: 2rem;
+      .infoType {
+        h3 {
+          font-family: geom-graphic, sans-serif;
+          font-weight: 600;
+        }
+        .divider {
+          height: 2px;
+          margin: 0.5rem 0px 0.5rem 0px;
+          background-color: var(--primary-color);
+          width: 30px;
+        }
+        ul {
+          list-style-type: none;
+          li {
+            font-family: priori-sans, sans-serif;
+            font-size: 1.25rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.locationDivider{
+    height: 2px;
+    margin: 0.5rem 0px 0.5rem 0px;
+    background-color: var(--primary-color);
+    max-width:800px;
+    margin:auto;
+}
+
+
+@media only screen and (max-width:1000px){
+    .location{
+        flex-direction:column;
+        align-items:center;
+    }
+    .locationDivider{
+        width:90vw;
+    }
+}
