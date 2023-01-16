@@ -21,20 +21,25 @@ const useCart = () => {
     if (itemExistsInCart) {
       if (amount === 0) {
         //Remove from cart
-        setCart(cart.filter((i) => i.item.id !== itemId));
+        let newCart = cart.filter((i) => i.item.id !== itemId);
+        setCart(newCart);
+        localStorage.setItem("cart", JSON.stringify(newCart));
       } else {
         itemExistsInCart.amount = amount;
         setCart(cartCopy);
+        localStorage.setItem("cart", JSON.stringify(cartCopy));
       }
     } else {
       let item = Items.find((i) => i.id === itemId) as ShopItem;
-      setCart([
+      let newCart = [
         ...cart,
         {
           item,
           amount,
         },
-      ]);
+      ];
+      setCart(newCart);
+      localStorage.setItem("cart", JSON.stringify(newCart));
     }
   };
 
@@ -46,11 +51,11 @@ const useCart = () => {
     );
   }, []);
 
-  useEffect(() => {
-    if (cart.length !== 0) {
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
-  }, [cart]);
+  // useEffect(() => {
+  //   if (cart.length !== 0) {
+  //     localStorage.setItem("cart", JSON.stringify(cart));
+  //   }
+  // }, [cart]);
 
   return { cart, setCart, setItemAmount };
 };

@@ -2,7 +2,7 @@ import Items from "../../utils/items";
 import type { ShopItem } from "../../utils/items";
 
 import styles from "../../styles/pages/Item.module.scss";
-import { FunctionComponent, useContext } from "react";
+import { FunctionComponent, useContext, useEffect, useState } from "react";
 import { GetServerSidePropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
 import Head from "next/head";
@@ -11,6 +11,7 @@ import { StyleRegistry } from "styled-jsx";
 import Button from "../../components/Button/Button";
 import Link from "next/link";
 import { CartContext, ICart } from "../../utils/CartContext";
+import Notification from "../../components/Notification/Notification";
 
 interface IParams extends ParsedUrlQuery {
   id: string;
@@ -33,6 +34,12 @@ type ItemPageProps = {
 
 const Item: FunctionComponent<ItemPageProps> = ({ item }) => {
   const { cart, setCart, setItemAmount } = useContext(CartContext) as ICart;
+  const [notifVisible, setNotifVisible] = useState<boolean>(false);
+  const [quantity, setQuantity] = useState<number>(1);
+
+  useEffect(() => {
+    setNotifVisible(false);
+  }, [quantity])
   return (
     <>
       <Head>
@@ -96,9 +103,16 @@ const Item: FunctionComponent<ItemPageProps> = ({ item }) => {
               </div>
             </>
           )}
+          {notifVisible && (
+            <Notification type={"success"}>
+              {`${quantity} item(s) added.`}<Link href="/cart">View Cart</Link>
+            </Notification>
+          )}
           <div className={styles.addToCart}>
             <div className={styles.select}>
-              <select>
+              <select value={quantity} onChange={(e) => {
+                setQuantity(parseInt(e.target.value));
+              }}>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -113,7 +127,8 @@ const Item: FunctionComponent<ItemPageProps> = ({ item }) => {
               <Button
                 background={true}
                 action={() => {
-                  setItemAmount(item.id, 1);
+                  setItemAmount(item.id, quantity);
+                  setNotifVisible(true);
                 }}
               >
                 Add to Cart

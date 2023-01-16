@@ -82,12 +82,14 @@ const Header = () => {
       </aside>
       <div className={styles.headerContent}>
         <div className={styles.logo}>
-          <Image
-            src={"/logo.png"}
-            layout={"fill"}
-            objectFit={"contain"}
-            alt="Martech logo"
-          />
+          <Link href="/">
+            <Image
+              src={"/logo.png"}
+              layout={"fill"}
+              objectFit={"contain"}
+              alt="Martech logo"
+            />
+          </Link>
         </div>
         <nav>
           {!mobileMenuOpen ? (

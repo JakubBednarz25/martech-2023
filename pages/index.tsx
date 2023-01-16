@@ -6,6 +6,7 @@ import Item from "../components/Shop/Item";
 
 import Items from "../utils/items";
 import Head from "next/head";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
@@ -34,8 +35,12 @@ const Home: NextPage = () => {
           </p>
         </div>
         <div className={styles.buttons}>
-          <Button background={true}>View suspension kits</Button>
-          <Button background={true}>Installation Services</Button>
+          <Button background={true}>
+            <Link href="/shop">View suspension kits</Link>
+          </Button>
+          <Button background={true}>
+            <Link href="/installation">Installation Services</Link>
+          </Button>
         </div>
       </section>
       <section className={styles.infoPicture}>

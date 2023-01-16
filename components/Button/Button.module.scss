@@ -17,13 +17,13 @@
 .background {
   background-color: var(--primary-color);
   a {
-    color: white;
+    color: white !important;
   }
   color:white;
 }
 .background:hover {
-  background-color: var(--primary-dark);
-  border-color: var(--primary-dark);
+  background-color: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
 }
 .default {
   background-color: white;
