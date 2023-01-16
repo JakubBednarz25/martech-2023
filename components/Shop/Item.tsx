@@ -12,7 +12,6 @@ type ItemPropsType = {
 };
 
 const Item: FunctionComponent<ItemPropsType> = ({ data }: ItemPropsType) => {
-  console.log(data);
   return (
     <article className={styles.item}>
       <Image

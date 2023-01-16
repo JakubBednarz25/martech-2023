@@ -118,7 +118,9 @@ const Header = () => {
               </li>
             ))}
             <li>
-              <Button background={true}>Cart</Button>
+              <Button background={true}>
+                <Link href="/cart">Cart</Link>
+              </Button>
             </li>
           </ul>
         </nav>

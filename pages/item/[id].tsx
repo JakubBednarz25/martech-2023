@@ -2,7 +2,7 @@ import Items from "../../utils/items";
 import type { ShopItem } from "../../utils/items";
 
 import styles from "../../styles/pages/Item.module.scss";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
 import { GetServerSidePropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
 import Head from "next/head";
@@ -10,6 +10,7 @@ import ItemLabel from "../../components/Shop/ItemLabel";
 import { StyleRegistry } from "styled-jsx";
 import Button from "../../components/Button/Button";
 import Link from "next/link";
+import { CartContext, ICart } from "../../utils/CartContext";
 
 interface IParams extends ParsedUrlQuery {
   id: string;
@@ -31,6 +32,7 @@ type ItemPageProps = {
 };
 
 const Item: FunctionComponent<ItemPageProps> = ({ item }) => {
+  const { cart, setCart, setItemAmount } = useContext(CartContext) as ICart;
   return (
     <>
       <Head>
@@ -108,7 +110,14 @@ const Item: FunctionComponent<ItemPageProps> = ({ item }) => {
                 <option value="9">9</option>
                 <option value="10">10</option>
               </select>
-              <Button background={true}>Add to Cart</Button>
+              <Button
+                background={true}
+                action={() => {
+                  setItemAmount(item.id, 1);
+                }}
+              >
+                Add to Cart
+              </Button>
             </div>
             <label>OR</label>
             <Button background={false}>
