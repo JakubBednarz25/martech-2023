@@ -16,7 +16,10 @@ const useCart = () => {
     console.log("1");
     let cartCopy = [...cart];
     console.log(itemId);
-    let itemExistsInCart = cartCopy.find((i) => i.item.id === itemId);
+    let itemExistsInCart = cartCopy.find((i) => {
+      console.log(i);
+      return i.item.id === itemId;
+    });
     console.log("2");
     console.log(itemExistsInCart);
     console.log("3");
