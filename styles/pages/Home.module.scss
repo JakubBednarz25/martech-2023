@@ -41,6 +41,7 @@
 .infoPicture {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  position: relative;
   img {
     width: 100%;
   }
@@ -100,6 +101,12 @@
   }
 }
 
+@media only screen and (max-width:1400px){
+  .infoPicture{
+    grid-template-columns: 1fr;
+  }
+}
+
 @media only screen and (max-width: 1100px) {
   .hero {
     padding: 2rem;
@@ -109,7 +116,7 @@
     }
   }
   .infoPicture {
-    grid-template-columns: 1fr;
+    // grid-template-columns: 1fr;
     img {
       max-width: 100vw;
     }
