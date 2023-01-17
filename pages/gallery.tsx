@@ -9,8 +9,6 @@ const Gallery = () => {
   return (
     <div className={styles.container}>
       <h1>Gallery</h1>
-      <SimpleReactLightBox>
-        <SRLWrapper>
           <div className={styles.imagesWrapper}>
             {[
               1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
@@ -26,8 +24,6 @@ const Gallery = () => {
               </a>
             ))}
           </div>
-        </SRLWrapper>
-      </SimpleReactLightBox>
     </div>
   );
 };
