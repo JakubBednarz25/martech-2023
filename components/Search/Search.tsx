@@ -1,6 +1,33 @@
 import styles from "./Search.module.scss";
 
+import Items, { ShopItem } from "../../utils/items";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+
+import {useRouter} from 'next/router';
+
 const Search = () => {
+  const [query, setQuery] = useState<string>("");
+  const [results, setResults] = useState<ShopItem[]>([]);
+  const dynamicRoute = useRouter().asPath;
+
+  useEffect(() => {
+    setQuery("");
+  }, [dynamicRoute]);
+
+  useEffect(() => {
+    if (query){
+      setResults(
+        Items.filter((item) =>
+          item.name.toLowerCase().includes(query.toLowerCase())
+        )
+      );
+    }
+    else{
+      setResults([]);
+    }
+  }, [query]);
+
   return (
     <div className={styles.search}>
       <svg
@@ -16,7 +43,23 @@ const Search = () => {
           fill="gray"
         />
       </svg>
-      <input type="search" placeholder="Search for items" />
+      <input
+        type="search"
+        placeholder="Search for items"
+        value={query}
+        onChange={(e) => {
+          setQuery(e.target.value);
+        }}
+      />
+      {results.length !== 0 && (
+        <ul className={styles.results}>
+          {results.map((result) => (
+            <li>
+              <Link href={`/item/${result.id}`}>{result.name}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

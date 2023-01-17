@@ -7,6 +7,8 @@ import Button from "../Button/Button";
 import Search from "../Search/Search";
 import Link from "next/link";
 
+import { useRouter } from "next/router";
+
 const navigationLinks = [
   {
     text: "Shop",
@@ -24,6 +26,12 @@ const navigationLinks = [
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const dynamicRoute = useRouter().asPath;
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [dynamicRoute]);
   return (
     <header className={styles.header}>
       <aside>
