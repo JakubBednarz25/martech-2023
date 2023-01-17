@@ -54,7 +54,7 @@ const Search = () => {
       {results.length !== 0 && (
         <ul className={styles.results}>
           {results.map((result) => (
-            <li>
+            <li key={result.id}>
               <Link href={`/item/${result.id}`}>{result.name}</Link>
             </li>
           ))}

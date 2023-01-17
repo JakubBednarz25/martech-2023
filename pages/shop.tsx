@@ -141,6 +141,7 @@ const Shop: NextPage = () => {
               {makesLogos.map((makeLogo) => (
                 <div
                   className={styles.make}
+                  key={makeLogo.logo}
                   onClick={() => {
                     setMakesVisible(false);
                     setItemType("kit");
@@ -267,7 +268,7 @@ const Shop: NextPage = () => {
                 {filteredItems
                   .slice((page - 1) * itemsPerPage, page * itemsPerPage)
                   .map((item) => (
-                    <Item data={item} />
+                    <Item key={item.id} data={item} />
                   ))}
               </div>
               <div className={styles.pageNumbers}>
@@ -283,6 +284,7 @@ const Shop: NextPage = () => {
                     className={`${styles.pageNav} ${
                       page === num + 1 ? styles.selectedPage : ""
                     }`}
+                    key={num}
                   >
                     {num + 1}
                   </div>
