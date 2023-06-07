@@ -22,6 +22,10 @@ const navigationLinks = [
     text: "Gallery",
     link: "gallery",
   },
+  {
+    text: "Partners",
+    link: "partners",
+  }
 ];
 
 const Header = () => {
