@@ -19,4 +19,14 @@
         margin-inline-end:8px;
     }
   }
+  .imageWrapper{
+    align-items:center;
+    border-radius:8px;
+    display:flex;
+    justify-content:center;
+    overflow:hidden;
+    background-color:rgba(0, 0, 0, 0.075);
+    height:250px;
+    width:100%;
+  }
 }

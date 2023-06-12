@@ -14,13 +14,24 @@ type ItemPropsType = {
 const Item: FunctionComponent<ItemPropsType> = ({ data }: ItemPropsType) => {
   return (
     <article className={styles.item}>
-      <Image
-        src={`/shop-images/${data.image}`}
-        alt={data.name}
-        width={250}
-        height={150}
-      />
-      <ItemLabel type={data.category}/>
+      {/* <div className={styles.imageContainer} style={{background: `url(/shop-images/${data.image})`, backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}></div> */}
+      <div className={styles.imageWrapper}>
+        <Image
+          src={`/shop-images/${data.image}`}
+          alt={data.name}
+          sizes="100vw"
+          height={0}
+          width={0}
+          style={{
+            width: "auto",
+            height: "auto",
+            maxWidth: "100%",
+            maxHeight: "100%",
+            display:'inline-block'
+          }}
+        />
+      </div>
+      <ItemLabel type={data.category} />
       <h3>{data.name}</h3>
       <div>
         <p>{`£${(data.totalPrice / 100).toFixed(2)}`}</p>
