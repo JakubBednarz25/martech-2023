@@ -284,7 +284,7 @@ const Items: ShopItem[] = [];
       for (let year of model.years) {
         Items.push({
           id: `${kit.make}-${model.name}-${year.range}-${year.basePrice}`,
-          name: `${kit.make} ${model.name} ${year.range}`,
+          name: `${kit.make} ${model.name} Air Suspension Kit ${year.range}`,
           category: "kit",
           subCategories: {
             make: kit.make,

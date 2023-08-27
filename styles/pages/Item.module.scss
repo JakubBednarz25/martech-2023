@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    min-width:600px;
+    min-width: 600px;
     max-width: 800px;
     padding: 1rem;
     .part {
@@ -40,6 +40,7 @@
       }
       h1 {
         font-size: 2rem;
+        max-width: 600px;
       }
       h2 {
         font-size: 1.25rem;
@@ -58,6 +59,26 @@
       }
       ul {
         padding: 0rem 1rem;
+      }
+      .customOptions {
+        display: flex;
+        gap: 1.5rem;
+        .customOption {
+          text-align: center;
+          padding: 5px 15px 5px 15px;
+          border: 2px solid rgba(145, 145, 145, 0.418);
+          cursor: pointer;
+          h3 {
+            font-family: priori-sans, sans-serif;
+          }
+          b {
+            font-family: t26-carbon, monospace;
+          }
+        }
+        .customOption:hover {
+          transition-duration: 0.25s;
+          background-color: rgba(145, 145, 145, 0.418);
+        }
       }
     }
     .addToCart {
@@ -97,15 +118,20 @@
   }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
   .container {
     .description {
-      min-width:300px;
-      max-width:350px;
+      min-width: 300px;
+      max-width: 350px;
       .addToCart {
         padding: 1rem;
         flex-direction: column;
         gap: 1rem;
+      }
+      .part{
+        .customOptions {
+          flex-direction:column;
+        }
       }
     }
   }

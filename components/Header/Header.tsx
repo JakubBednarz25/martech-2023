@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 const navigationLinks = [
   {
     text: "Shop",
-    link: "shop",
+    link: "",
   },
   {
     text: "Installation",
@@ -131,11 +131,11 @@ const Header = () => {
                 <Link href={`/${link.link}`}>{link.text}</Link>
               </li>
             ))}
-            <li>
+            {/* <li>
               <Button background={true}>
                 <Link href="/cart">Cart</Link>
               </Button>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </div>

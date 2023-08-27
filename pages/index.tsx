@@ -1,102 +1,315 @@
 import type { NextPage } from "next";
-import styles from "../styles/pages/Home.module.scss";
+import { useState, useEffect } from "react";
+
+import type { CategoryType, carMaketypes, ShopItem } from "../utils/items";
+import Items from "../utils/items";
+import { kitTypes } from "../utils/items";
+
+import styles from "../styles/pages/Shop.module.scss";
 
 import Button from "../components/Button/Button";
+
 import Item from "../components/Shop/Item";
-
-import Items from "../utils/items";
+import Image from "next/image";
 import Head from "next/head";
-import Link from "next/link";
 
-const Home: NextPage = () => {
+type makeLogo = {
+  make: carMaketypes;
+  logo: string;
+};
+
+const makesLogos: makeLogo[] = [
+  {
+    make: "Citroen",
+    logo: "citroen.png",
+  },
+  {
+    make: "Fiat",
+    logo: "fiat.png",
+  },
+  {
+    make: "Ford",
+    logo: "ford.png",
+  },
+  {
+    make: "Iveco",
+    logo: "iveco.png",
+  },
+  {
+    make: "Mercedes",
+    logo: "mercedes.png",
+  },
+  {
+    make: "Nissan",
+    logo: "nissan.png",
+  },
+  {
+    make: "Peugeot",
+    logo: "peugeot.png",
+  },
+  {
+    make: "Vauxhall",
+    logo: "vauxhall.png",
+  },
+  {
+    make: "Volkswagen",
+    logo: "vw.png",
+  },
+];
+
+const Shop: NextPage = () => {
+  const [makesVisible, setMakesVisible] = useState(false);
+  const itemTypes: CategoryType[] = [
+    "all",
+    "accessory",
+    "air bag",
+    "kit",
+    "gauge",
+  ];
+  const [itemType, setItemType] = useState<CategoryType>("all");
+  const [kitMake, setKitMake] = useState<carMaketypes>("any");
+  const [kitModel, setKitModel] = useState<string>("any");
+  const [kitYear, setKitYear] = useState<string>("any");
+
+  const [initialItemsLoad, setInitialsItemsLoad] = useState<boolean>(false);
+
+  const [itemsPerPage, setItemsPerPage] = useState<number>(6);
+  const [page, setPage] = useState<number>(1);
+
+  const [filteredItems, setFilteredItems] = useState<ShopItem[]>(Items);
+
+  const filterKits = () => {
+    let filtered: ShopItem[] = [];
+    const allKits = Items.filter((item) => item.category === "kit");
+    if (kitMake === "any") {
+      filtered = allKits;
+    } else {
+      //Kit make is selected
+      if (kitModel === "any") {
+        //Kit make selected, but not kit model
+        filtered = allKits.filter((kit) => kit.subCategories?.make === kitMake);
+      } else {
+        //Kit make and kit model selected
+        if (kitYear === "any") {
+          //Kit make and kit model selected, but not year
+          filtered = allKits.filter(
+            (kit) =>
+              kit.subCategories?.make === kitMake &&
+              kit.subCategories?.model === kitModel
+          );
+        } else {
+          //Kit make, model and year selected
+          filtered = allKits.filter(
+            (kit) =>
+              kit.subCategories?.make === kitMake &&
+              kit.subCategories?.model === kitModel &&
+              kit.subCategories?.range === kitYear
+          );
+        }
+      }
+    }
+    console.log(filtered);
+    setFilteredItems(filtered);
+    setPage(1);
+  };
+
+  const filterOtherTypes = () => {
+    if (itemType === "all") {
+      setFilteredItems(Items);
+    } else {
+      setFilteredItems(Items.filter((item) => item.category === itemType));
+    }
+    setPage(1);
+  };
+
+  useEffect(() => {
+    if (initialItemsLoad) {
+      if (kitMake === "any") {
+        filterOtherTypes();
+      } else {
+        filterKits();
+      }
+    }
+  }, [kitMake]);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
       <Head>
-        <title>Home - Martech Air-Suspensions Ltd</title>
+        <title>Shop - Martech Air-Suspensions Ltd</title>
       </Head>
-      <section className={styles.hero}>
-        <h1>
-          Light commercial and leisure vehicles air suspension specialists
-        </h1>
-        <p>
-          Martech air suspensions ltd is a leading vehicle air suspension kit
-          manufacturer and distributor with years of experience, providing you
-          with the best service.
-        </p>
-        <div className={styles.ebayProof}>
-          <p>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-              <path d="M606 189.5l-54.8 109.9-54.9-109.9h-37.5l10.9 20.6c-11.5-19-35.9-26-63.3-26-31.8 0-67.9 8.7-71.5 43.1h33.7c1.4-13.8 15.7-21.8 35-21.8 26 0 41 9.6 41 33v3.4c-12.7 0-28 .1-41.7.4-42.4.9-69.6 10-76.7 34.4 1-5.2 1.5-10.6 1.5-16.2 0-52.1-39.7-76.2-75.4-76.2-21.3 0-43 5.5-58.7 24.2v-80.6h-32.1v169.5c0 10.3-.6 22.9-1.1 33.1h31.5c.7-6.3 1.1-12.9 1.1-19.5 13.6 16.6 35.4 24.9 58.7 24.9 36.9 0 64.9-21.9 73.3-54.2-.5 2.8-.7 5.8-.7 9 0 24.1 21.1 45 60.6 45 26.6 0 45.8-5.7 61.9-25.5 0 6.6.3 13.3 1.1 20.2h29.8c-.7-8.2-1-17.5-1-26.8v-65.6c0-9.3-1.7-17.2-4.8-23.8l61.5 116.1-28.5 54.1h35.9L640 189.5zM243.7 313.8c-29.6 0-50.2-21.5-50.2-53.8 0-32.4 20.6-53.8 50.2-53.8 29.8 0 50.2 21.4 50.2 53.8 0 32.3-20.4 53.8-50.2 53.8zm200.9-47.3c0 30-17.9 48.4-51.6 48.4-25.1 0-35-13.4-35-25.8 0-19.1 18.1-24.4 47.2-25.3 13.1-.5 27.6-.6 39.4-.6zm-411.9 1.6h128.8v-8.5c0-51.7-33.1-75.4-78.4-75.4-56.8 0-83 30.8-83 77.6 0 42.5 25.3 74 82.5 74 31.4 0 68-11.7 74.4-46.1h-33.1c-12 35.8-87.7 36.7-91.2-21.6zm95-21.4H33.3c6.9-56.6 92.1-54.7 94.4 0z" />
-            </svg>
-            4,700+ Units Sold
-          </p>
-          <p>
-            Over 360 positive reviews on eBay, with 99,7% positive feedback.
-          </p>
-        </div>
-        <div className={styles.buttons}>
-          <Button background={true}>
-            <Link href="/shop">View suspension kits</Link>
-          </Button>
-          <Button background={true}>
-            <Link href="/installation">Installation Services</Link>
-          </Button>
-        </div>
-      </section>
-      <section className={styles.infoPicture}>
-        <div className={styles.textPart}>
-          <h2>Our services</h2>
-          <div className={styles.paragraphs}>
-            <p>
-              We provide high quality vehicle air suspension kits, designed for
-              a range of different vehicle brands and types. Our kits use
-              premium RUBENA airbags, which are famous all around the world for
-              their excellent quality.
-            </p>
-            <p>
-              Our kits are professionally designed, and are perfect to the
-              millimetre, allowing for easy self-installation and management.
-              The metal used for the mounting brackets is high grade steel, the
-              benefit of that being the very long lifespan of the equipment.
-            </p>
-            <ul>
-              <p>We produce air suspension kits for the following:</p>
-              <li>Motorhomes</li>
-              <li>Campervans</li>
-              <li>Vans</li>
-              <li>Flatbeds</li>
-              <li>Dropsites</li>
-              <li>Chassis Cabs</li>
-              <li>Recovery Trucks</li>
-            </ul>
-            <p>
-              We have multiple installation points in the UK, you can find them
-              here.
-            </p>
+      {makesVisible ? (
+        <>
+          <section className={styles.makes}>
+            <h1>Select car make</h1>
+            <div className={styles.wrapper}>
+              {makesLogos.map((makeLogo) => (
+                <div
+                  className={styles.make}
+                  key={makeLogo.logo}
+                  onClick={() => {
+                    setMakesVisible(false);
+                    setItemType("kit");
+                    setKitMake(makeLogo.make as carMaketypes);
+                    scrollToTop();
+                    setInitialsItemsLoad(false);
+                  }}
+                >
+                  <img src={`/makes/${makeLogo.logo}`} alt={makeLogo.make} />
+                </div>
+              ))}
+            </div>
+          </section>
+        </>
+      ) : (
+        <section className={styles.shop}>
+          <h1>Shop</h1>
+          <div className={styles.container}>
+            <div className={styles.filters}>
+              <div>
+                <h2>Filters</h2>
+                <p>Select your searching criteria</p>
+              </div>
+              <div className={styles.selections}>
+                <div className={styles.option}>
+                  <label>Item type</label>
+                  <select
+                    value={itemType}
+                    onChange={(e) => {
+                      setItemType(e.target.value as CategoryType);
+                      setKitMake("any");
+                    }}
+                  >
+                    {itemTypes.map((type) => (
+                      <option key={type} value={type}>
+                        {type}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                {itemType === "kit" && (
+                  <>
+                    <div className={styles.option}>
+                      <label>Make</label>
+                      <select
+                        value={kitMake}
+                        onChange={(e) => {
+                          setKitMake(e.target.value as carMaketypes);
+                          setKitModel("any");
+                          setKitYear("any");
+                        }}
+                      >
+                        <option value={"any"}>Any</option>
+                        {kitTypes.map((kitType) => (
+                          <option key={kitType.id} value={kitType.make}>
+                            {kitType.make}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    {kitMake !== "any" && (
+                      <div className={styles.option}>
+                        <label>Model</label>
+                        <select
+                          value={kitModel}
+                          onChange={(e) => {
+                            setKitModel(e.target.value);
+                            setKitYear("any");
+                          }}
+                        >
+                          <option value="any">Any</option>
+                          {kitTypes
+                            .find((type) => type.make === kitMake)
+                            ?.models.map((model) => (
+                              <option key={model.name} value={model.name}>
+                                {model.name}
+                              </option>
+                            ))}
+                        </select>
+                      </div>
+                    )}
+                    {kitModel !== "any" && (
+                      <div className={styles.option}>
+                        <label>Year</label>
+                        <select
+                          onChange={(e) => {
+                            setKitYear(e.target.value);
+                          }}
+                          value={kitYear}
+                        >
+                          <option value={"any"}>Any</option>
+
+                          {kitTypes
+                            .find((type) => type.make === kitMake)
+                            ?.models.find((model) => model.name === kitModel)
+                            ?.years.map((year) => (
+                              <option key={year.image} value={year.range}>
+                                {year.range}
+                              </option>
+                            ))}
+                        </select>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+              <Button
+                background={true}
+                action={() => {
+                  if (itemType === "kit") {
+                    filterKits();
+                  } else {
+                    filterOtherTypes();
+                  }
+                }}
+              >
+                Search
+              </Button>
+            </div>
+            <div className={styles.itemsContainer}>
+              <p>{`Showing ${(page - 1) * itemsPerPage + 1}-${Math.min(
+                page * itemsPerPage,
+                filteredItems.length
+              )} of ${filteredItems.length} results`}</p>
+              <div className={styles.wrapper}>
+                {filteredItems
+                  .slice((page - 1) * itemsPerPage, page * itemsPerPage)
+                  .map((item) => (
+                    <Item key={item.id} data={item} />
+                  ))}
+              </div>
+              <div className={styles.pageNumbers}>
+                {Array.from(
+                  Array(
+                    Math.max(Math.ceil(filteredItems.length / itemsPerPage), 1)
+                  ).keys()
+                ).map((num) => (
+                  <div
+                    onClick={() => {
+                      setPage(num + 1);
+                      scrollToTop();
+                    }}
+                    className={`${styles.pageNav} ${
+                      page === num + 1 ? styles.selectedPage : ""
+                    }`}
+                    key={num}
+                  >
+                    {num + 1}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className={styles.contactInfo}>
-            <label>Email: martechuk85@gmail.com</label>
-            <label>Mobile: 07715129997</label>
-          </div>
-        </div>
-        <picture>
-          <source srcSet="/landing-page-suspension.png" />
-          <img
-            src="/landing-page-suspension.png"
-            alt="Image of Martech air suspension fitted"
-          />
-        </picture>
-      </section>
-      <section className={styles.featuredKits}>
-        <h2>Featured Kits</h2>
-        <div className={styles.itemsWrapper}>
-          {Items.slice(0, 5).map((item) => (
-            <Item key={item.id} data={item} />
-          ))}
-        </div>
-      </section>
+        </section>
+      )}
     </>
   );
 };
 
-export default Home;
+export default Shop;

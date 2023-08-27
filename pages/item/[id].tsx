@@ -17,6 +17,30 @@ interface IParams extends ParsedUrlQuery {
   id: string;
 }
 
+type CustomOption = {
+  id: number;
+  name: string;
+  price: number;
+};
+
+const customOptions: CustomOption[] = [
+  {
+    id: 1,
+    name: "Compressor",
+    price: 2000,
+  },
+  {
+    id: 2,
+    name: "Twin gauge",
+    price: 3000,
+  },
+  {
+    id: 3,
+    name: "Full",
+    price: 5000,
+  },
+];
+
 export const getServerSideProps = (ctx: GetServerSidePropsContext) => {
   const { id } = ctx.params as IParams;
   console.log(id);
@@ -39,11 +63,13 @@ const Item: FunctionComponent<ItemPageProps> = ({ item }) => {
 
   useEffect(() => {
     setNotifVisible(false);
-  }, [quantity])
+  }, [quantity]);
   return (
     <>
       <Head>
-        <title>{`${item.name} - Martech Air-Suspensions Ltd`}</title>
+        <title>{`${item.name} ${
+          item.category === "kit" && "Air Suspension Kit"
+        } - Martech Air-Suspensions Ltd`}</title>
       </Head>
       <div className={styles.container}>
         <section className={styles.imageContainer}>
@@ -51,7 +77,7 @@ const Item: FunctionComponent<ItemPageProps> = ({ item }) => {
         </section>
         <section className={styles.description}>
           <div className={styles.part}>
-            <h1>{item.name}</h1>
+            <h1>{`${item.name}`}</h1>
             {item.category === "kit" && (
               <p className={styles.certText}>Safety B Certified</p>
             )}
@@ -101,18 +127,33 @@ const Item: FunctionComponent<ItemPageProps> = ({ item }) => {
                   <li>Fitting guide</li>
                 </ul>
               </div>
+              {/* <div className={styles.part}>
+                <h2>Customize</h2>
+                <div className={styles.customOptions}>
+                  {customOptions.map((customOption) => (
+                    <div className={styles.customOption}>
+                      <h3>{customOption.name}</h3>
+                      <b>{`+ £${(customOption.price / 100).toFixed(2)}`}</b>
+                    </div>
+                  ))}
+                </div>
+              </div> */}
             </>
           )}
           {notifVisible && (
             <Notification type={"success"}>
-              {`${quantity} item(s) added.`}<Link href="/cart">View Cart</Link>
+              {`${quantity} item(s) added.`}
+              <Link href="/cart">View Cart</Link>
             </Notification>
           )}
-          <div className={styles.addToCart}>
+          {/* <div className={styles.addToCart}>
             <div className={styles.select}>
-              <select value={quantity} onChange={(e) => {
-                setQuantity(parseInt(e.target.value));
-              }}>
+              <select
+                value={quantity}
+                onChange={(e) => {
+                  setQuantity(parseInt(e.target.value));
+                }}
+              >
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -140,7 +181,12 @@ const Item: FunctionComponent<ItemPageProps> = ({ item }) => {
                 View on eBay
               </a>
             </Button>
-          </div>
+          </div> */}
+          <Button background={false}>
+            <a target="_blank" href={item.ebay} rel="noopener noreferrer">
+              Buy on eBay
+            </a>
+          </Button>
         </section>
       </div>
     </>
