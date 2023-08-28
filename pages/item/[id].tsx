@@ -182,6 +182,25 @@ const Item: FunctionComponent<ItemPageProps> = ({ item }) => {
               </a>
             </Button>
           </div> */}
+          {/* <div className={styles.part}>
+            <h2>Variants</h2>
+            <div className={styles.variants}>
+              <div className={styles.variant}>
+                <Button background={false}>
+                  <a target="_blank" href={item.ebay} rel="noopener noreferrer">
+                    Standard
+                  </a>
+                </Button>
+              </div>
+              <div className={styles.variant}>
+                <Button background={false}>
+                  <a target="_blank" href={"https://www.ebay.co.uk/itm/265183150810?hash=item3dbe25c2da:g:nGIAAOSwed5iJksO"} rel="noopener noreferrer">
+                    + 12V Compressor
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div> */}
           <Button background={false}>
             <a target="_blank" href={item.ebay} rel="noopener noreferrer">
               Buy on eBay
