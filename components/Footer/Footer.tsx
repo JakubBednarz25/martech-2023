@@ -86,7 +86,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.bottom}>
-        <p>Mar-tech Air Suspensions Limited © 2023</p>
+        <p>Mar-tech Logistics Ltd © 2023</p>
         <p>Mon - Fri/9:00 AM - 5:00 PM</p>
       </div>
     </footer>
